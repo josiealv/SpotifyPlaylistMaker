@@ -8,7 +8,8 @@ CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 name = "name"
 id_str = "id"
 artists = "artists"
-tracks = "tracks"
+items = "items"
+track_str = "track"
 class Client:
     def __init__(self, auth_token, user_id):
         self.user_id = user_id
@@ -34,8 +35,9 @@ class Client:
         )
         return response
     def get_last_played_tracks(self, limit=15):
-        endpoint = "https://api.spotify.com/v1/me/player/recently-played?limit={limit}" 
+        endpoint = f"https://api.spotify.com/v1/me/player/recently-played?limit={limit}" 
         response = self.get_api_request(endpoint)
         json_response = response.json()
-        tracks = [Track(track[name], track[artists][0][name], track[id_str]) for
-                  track in json_response[tracks]] # tracks might be items instead
+        tracks = [Track(track[track_str][name], track[track_str][artists][0][name], track[track_str][id_str]) for
+                  track in json_response[items]] # tracks might be items instead
+        return tracks
