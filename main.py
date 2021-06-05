@@ -7,6 +7,6 @@ def main():
     print ("Select the following:\n")
     print ("playlist-modify-public\n")
     print ("playlist-modify-private\n")
-#  print ("Select the following:\n")
+    print ("user-library-read:\n")
     auth_token = input ("Enter genereated OAuth Token:\n")
     cli = Client(auth_token, user_id)
