@@ -10,11 +10,11 @@ def main():
     print ("playlist-modify-private")
     print ("user-read-recently-played")
     auth_token = input ("Enter genereated OAuth Token: \n")
-    cli = Client(auth_token, user_id)
+    cli = Client(auth_token, user_id) 
     print("\n")
 
     num_tracks = int(input("How many of your recently played tracks would you like to see? (Min: 10, Max: 50) "))
-    last_tracks = cli.get_last_played_tracks(num_tracks)
+    last_tracks = cli.get_last_played_tracks(num_tracks) 
     print("\n")
 
     print(f"Here are your last {num_tracks} played:")
@@ -23,20 +23,15 @@ def main():
     print("\n")
 
     indexes = input(f"Enter the number of the tracks, separated by a comma, that you want to base the playlist around (Min: 1, Max: {num_tracks}) ")
-    indexes = indexes.split(",")
+    indexes = indexes.split(",") 
     seeds = [last_tracks[int (i)-1] for i in indexes]
-    num_recs = int (input ("How many recommended tracks would you like? (Min: 1, Max: 100) "))
+    num_recs = int (input ("How many recommended tracks would you like (tracks entered earlier will be included in playlist)? (Min: 1, Max: 100) "))
     recommnded_tracks = cli.get_recommedations(seeds, num_recs)
     print("\n")
 
-    print(f"Here are your {num_recs} recommneded tracks")
-    for i, track in enumerate(recommnded_tracks):
-        print(f"{i+1}. {track.name} by {track.artist}")
-    print("\n")
-
-    recommnded_tracks += seeds
+    recommnded_tracks += seeds # add seed tracks to list so they can be apart of the playlist 
     playlist_name = input("Enter the name of your playlist: ")
     playlist = cli.create_playlist(playlist_name, recommnded_tracks)
     print(f"Created {playlist.name} with recommendded tracks successfully!")
-    print(f"url: {playlist.url}")
+    print(f"url: {playlist.url}") # print link to playlist so user can access it immediately 
 main()
