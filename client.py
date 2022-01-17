@@ -94,7 +94,7 @@ class Client:
     def create_playlist (self, name, playlist_tracks):
         data_playlist = json.dumps({
             "name": name,
-            "description": "bangerz",
+            "description": "Playlist generated programatically",
             "public": True
         })
         endpoint_playlist = f"https://api.spotify.com/v1/users/{self.user_id}/playlists" 
